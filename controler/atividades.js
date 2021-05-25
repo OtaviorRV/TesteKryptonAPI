@@ -66,10 +66,8 @@ exports.get = (req, res, next) => {
   if (req.params.page === undefined || req.params.page < 0) {
     req.params.page = 1;
   }
-  let horas;
-  let atividades;
-  dados.forEach(
-    (dado) => ((horas = dado["hora"]), (atividades = dado["atividade"])),
-  );
-  res.status(201).send({});
+
+  let novosdados = dados.slice((req.params.page - 1) * 5, 5 * req.params.page);
+
+  res.status(201).send(novosdados);
 };
